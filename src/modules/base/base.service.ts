@@ -1,11 +1,9 @@
-import { Component, Inject, BadGatewayException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, BadGatewayException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { STATUS_CODES } from 'http';
 import { IBaseService } from '../base/IBase.service';
 import { BaseEntity } from './base.entity';
 
-@Component()
+@Injectable()
 export class BaseService<T extends BaseEntity> implements IBaseService<T>{
 	constructor(
     private readonly genericRepository: Repository<T>) {}

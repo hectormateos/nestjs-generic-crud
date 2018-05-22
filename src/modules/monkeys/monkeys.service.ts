@@ -1,9 +1,9 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import * as firebase from 'firebase';
 
-@Component()
+@Injectable()
 export class MonkeysService {
     firebaseApp: any;
     monkeys: any;

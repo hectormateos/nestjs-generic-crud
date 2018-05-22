@@ -4,6 +4,6 @@ import { MonkeysService } from "./monkeys.service";
 
 @Module({
     controllers: [MonkeysController],
-    components: [MonkeysService],
+    providers: [MonkeysService],
 })
 export class MonkeysModule {}

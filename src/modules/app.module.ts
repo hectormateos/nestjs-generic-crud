@@ -1,14 +1,16 @@
-import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { CatsModule } from './cats/cats.module';
-import { DogsModule } from './dogs/dogs.module';
-import { MonkeysModule } from './monkeys/monkeys.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
-
-import { CorsMiddleware } from '@nest-middlewares/cors';
-import { ServeStaticMiddleware } from '@nest-middlewares/serve-static';
-import { MiddlewaresConsumer, RequestMethod } from '@nestjs/common';
+import {Module} from '@nestjs/common';
+import {UsersModule} from './users/users.module';
+import {CatsModule} from './cats/cats.module';
+import {DogsModule} from './dogs/dogs.module';
+import {MonkeysModule} from './monkeys/monkeys.module';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {Connection} from 'typeorm';
+import {CorsMiddleware} from '@nest-middlewares/cors';
+import {MiddlewareConsumer} from '@nestjs/common';
+import {CatsController} from "./cats/cats.controller";
+import {DogsController} from "./dogs/dogs.controller";
+import {UsersController} from "./users/users.controller";
+import {MonkeysController} from "./monkeys/monkeys.controller";
 
 @Module({
     modules: [
@@ -19,16 +21,13 @@ import { MiddlewaresConsumer, RequestMethod } from '@nestjs/common';
         TypeOrmModule.forRoot()
     ],
 })
-/*export class ApplicationModule {
-    constructor(private readonly connection: Connection) {}
-}*/
 
 export class ApplicationModule {
 
-    constructor(private readonly connection: Connection) {}
+    constructor(private readonly connection: Connection) {
+    }
 
-    configure(consumer: MiddlewaresConsumer) {
-
+    configure(consumer: MiddlewareConsumer) {
         const corsOptions = {
             //origin: 'http://localhost:4200',
             origin: '*',
@@ -36,10 +35,13 @@ export class ApplicationModule {
         };
 
         CorsMiddleware.configure(corsOptions);
-        ServeStaticMiddleware.configure('src/public');
 
-        consumer.apply([CorsMiddleware, ServeStaticMiddleware]).forRoutes(
-            { path: '*', method: RequestMethod.ALL },
-        );
+        consumer.apply([CorsMiddleware])
+            .forRoutes(
+                CatsController,
+                DogsController,
+                MonkeysController,
+                UsersController
+            );
     }
 }
