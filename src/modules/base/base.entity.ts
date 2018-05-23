@@ -1,8 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 export class BaseEntity {
+
     @PrimaryGeneratedColumn()
-    @ApiModelPropertyOptional()
+    @ApiModelProperty()
+    @PrimaryColumn()
     public id: number;
 }

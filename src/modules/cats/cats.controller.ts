@@ -1,5 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
+import {ApiUseTags} from "@nestjs/swagger";
 
+@ApiUseTags('cats')
 @Controller('cats')
 export class CatsController {
   cats: string[];
