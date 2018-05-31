@@ -1,14 +1,14 @@
-import {Module} from '@nestjs/common';
-import {UsersModule} from './users/users.module';
-import {AnimalsModule} from './animals/animals.module';
-import {TypeOrmModule} from '@nestjs/typeorm';
-import {Connection} from 'typeorm';
-import {CorsMiddleware} from '@nest-middlewares/cors';
-import {MiddlewareConsumer} from '@nestjs/common';
-import {CatsController} from "./animals/cats/cats.controller";
-import {DogsController} from "./animals/dogs/dogs.controller";
-import {UsersController} from "./users/users.controller";
-import {MonkeysController} from "./animals/monkeys/monkeys.controller";
+import { Module } from '@nestjs/common';
+import { UsersModule } from './users/users.module';
+import { AnimalsModule } from './animals/animals.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
+import { CorsMiddleware } from '@nest-middlewares/cors';
+import { MiddlewareConsumer } from '@nestjs/common';
+import { CatsController } from "./animals/cats/cats.controller";
+import { DogsController } from "./animals/dogs/dogs.controller";
+import { UsersController } from "./users/users.controller";
+import { MonkeysController } from "./animals/monkeys/monkeys.controller";
 
 @Module({
     modules: [
