@@ -1,23 +1,19 @@
 import {Module} from '@nestjs/common';
 import {UsersModule} from './users/users.module';
-import {CatsModule} from './cats/cats.module';
-import {DogsModule} from './dogs/dogs.module';
-import {MonkeysModule} from './monkeys/monkeys.module';
+import {AnimalsModule} from './animals/animals.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {Connection} from 'typeorm';
 import {CorsMiddleware} from '@nest-middlewares/cors';
 import {MiddlewareConsumer} from '@nestjs/common';
-import {CatsController} from "./cats/cats.controller";
-import {DogsController} from "./dogs/dogs.controller";
+import {CatsController} from "./animals/cats/cats.controller";
+import {DogsController} from "./animals/dogs/dogs.controller";
 import {UsersController} from "./users/users.controller";
-import {MonkeysController} from "./monkeys/monkeys.controller";
+import {MonkeysController} from "./animals/monkeys/monkeys.controller";
 
 @Module({
     modules: [
         UsersModule,
-        CatsModule,
-        DogsModule,
-        MonkeysModule,
+        AnimalsModule,
         TypeOrmModule.forRoot()
     ],
 })
