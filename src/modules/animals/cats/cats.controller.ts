@@ -1,24 +1,32 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {Controller, Get, Post, Body} from '@nestjs/common';
 import {ApiUseTags} from "@nestjs/swagger";
 
 @ApiUseTags('cats')
 @Controller('cats')
 export class CatsController {
-  cats: string[];
+    cats: any[];
 
-  constructor() {
-    this.cats = ['red cat', 'green cat', 'yellow cat'];
-  }
+    constructor() {
+        this.cats = [
+            {name: 'Abisinio'},
+            {name: 'American Curl'},
+            {name: 'Azul ruso'},
+            {name: 'American shorthair'},
+            {name: 'American wirehair'},
+            {name: 'Angora turco'},
+            {name: 'Africano doméstico'}
+        ];
+    }
 
-  @Get()
-  findAll() {
-    return this.cats;
-  }
+    @Get()
+    findAll() {
+        return this.cats;
+    }
 
-  @Post()
-  create(@Body() body) {
-    const catName = body.name;
-    this.cats.push(catName);
-    return {name: catName};
-  }
+    @Post()
+    create(@Body() body) {
+        const cat = body;
+        this.cats.push(cat);
+        return cat;
+    }
 }

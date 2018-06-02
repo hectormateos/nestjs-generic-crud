@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@nestjs/common';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import * as firebase from 'firebase';
 
