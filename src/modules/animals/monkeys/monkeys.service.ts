@@ -26,11 +26,9 @@ export class MonkeysService {
     }
 
     async add(monkey: any): Promise<any> {
-        /*return Observable.of(
-            this.dbHandler.push(monkey).then(
-                () => monkey,
-                (err) => err)
-        );*/
-        return this.dbHandler.push(monkey);
+        return this.dbHandler.push(monkey).then(
+            () => monkey,
+            (err) => err
+        );
     }
 }
