@@ -1,27 +1,39 @@
-import { Test } from '@nestjs/testing';
-import { CatsController } from './cats.controller';
-//import { CatsService } from './cats.service';
+import {Test} from '@nestjs/testing';
+import {CatsController} from './cats.controller';
 
 describe('CatsController', () => {
     let catsController: CatsController;
-    //let catsService: CatsService;
+
+    const itemList = [
+        {name: 'x'},
+        {name: 'y'}
+    ];
+
+    const newItem = {name: 'x'};
 
     beforeEach(async () => {
         const module = await Test.createTestingModule({
-            controllers: [CatsController],
-            //providers: [CatsService],
+            controllers: [CatsController]
         }).compile();
 
-        //catsService = module.get<CatsService>(CatsService);
         catsController = module.get<CatsController>(CatsController);
     });
 
     describe('findAll', () => {
         it('should return an array of cats', async () => {
-            const result = ['red cat', 'green cat', 'yellow cat'];
-            //jest.spyOn(catsService, 'findAll').mockImplementation(() => result);
+            expect(typeof catsController.findAll()).toBe(typeof itemList);
+            catsController.findAll().map(x => expect(x.name).not.toBeNull());
+        });
+    });
 
-            expect(await catsController.findAll().length).toBe(result.length);
+    describe('create', () => {
+        it('should return a cat', async () => {
+            const initialCount = (catsController.findAll()).length;
+            const createResult = catsController.create(newItem);
+            expect(typeof createResult).toBe(typeof newItem);
+            expect(createResult.name).not.toBeNull();
+            const finalCount = (catsController.findAll()).length;
+            expect(finalCount > initialCount).toBeTruthy();
         });
     });
 });

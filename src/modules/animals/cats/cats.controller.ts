@@ -24,8 +24,7 @@ export class CatsController {
     }
 
     @Post()
-    create(@Body() body) {
-        const cat = body;
+    create(@Body() cat) {
         this.cats.push(cat);
         return cat;
     }
