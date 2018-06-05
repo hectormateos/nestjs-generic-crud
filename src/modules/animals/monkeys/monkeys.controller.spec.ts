@@ -26,32 +26,24 @@ describe('MonkeysController', () => {
 
     describe('findAll', () => {
         it('should return an array of monkeys', async () => {
+            jest.spyOn(monkeysService, 'findAll').mockImplementation(() => Observable.of(itemList));
 
-            //jest.spyOn(monkeysService, 'findAll').mockImplementation(() => Observable.of(itemList));
-
-            //expect(typeof await monkeysController.findAll()).toBe(typeof itemList);
-            const res = await monkeysController.findAll();
-            console.log(res)
-            /*res.map(x => expect(x.name).not.toBeNull());
-
-            monkeysController.findAll().subscribe((res) => {
+            monkeysController.findAll().then((res) => {
                 res.map(x => expect(x.name).not.toBeNull());
-            });*/
+            });
         });
     });
 
-    /*describe('create', () => {
+    describe('create', () => {
         it('should return a monkey', async () => {
-            jest.spyOn(monkeysService, 'findAll').mockImplementation(() => Observable.of(newItem));
+            jest.spyOn(monkeysService, 'add').mockImplementation(() => {
+                return new Promise((resolve, reject) => {
+                    resolve(newItem);
+                })
+            });
 
-            const initialCount = (await monkeysController.findAll()).length;
-            const createResult = await monkeysController.create(newItem);
-
-            expect(typeof createResult).toBe(typeof newItem);
-            expect(createResult.name).not.toBeNull();
-
-            const finalCount = (await monkeysController.findAll()).length;
-            expect(finalCount > initialCount).toBeTruthy();
+            const data = await monkeysController.create(newItem);
+            expect(data.name).toBe(newItem.name);
         });
-    });*/
+    });
 });

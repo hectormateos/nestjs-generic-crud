@@ -13,7 +13,9 @@ export class MonkeysService {
 
     constructor() {
         this.monkeys = [];
-        this.firebaseApp = firebase.initializeApp(FirebaseConfig);
+        if (!firebase.apps.length) {
+            this.firebaseApp = firebase.initializeApp(FirebaseConfig);
+        }
         this.dbHandler = firebase.database().ref(this.dbPath);
     }
 
@@ -23,11 +25,12 @@ export class MonkeysService {
         return Observable.of(this.monkeys);
     }
 
-    add(monkey: any): Observable<any> {
-        return Observable.of(
+    async add(monkey: any): Promise<any> {
+        /*return Observable.of(
             this.dbHandler.push(monkey).then(
                 () => monkey,
                 (err) => err)
-        );
+        );*/
+        return this.dbHandler.push(monkey);
     }
 }
